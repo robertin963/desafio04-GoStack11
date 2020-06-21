@@ -14,17 +14,19 @@ import api from "./services/api";
 
 export default function App() {
   const [repositories, setRepositories] = useState([]);
+
   useEffect(() => {
     api.get("repositories").then((response) => {
       setRepositories(response.data);
     });
-  }, [repositories]);
+  }, []);
 
   async function handleLikeRepository(id) {
-    const repositoryId = repositories.findIndex((rep) => rep.id === id);
     const repository = await api.post(`repositories/${id}/like`);
-    repositories[repositoryId] = repository.data;
-    //setRepositories(repositories);
+    const newRepos = repositories.map((rep) =>
+      rep.id === id ? repository.data : rep
+    );
+    setRepositories(newRepos);
   }
 
   return (
