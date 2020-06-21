@@ -37,10 +37,10 @@ export default function App() {
           data={repositories}
           keyExtractor={(repository) => repository.id}
           renderItem={({ item: repository }) => (
-            <View key={repository.id} style={styles.repositoryContainer}>
+            <View style={styles.repositoryContainer}>
               <Text style={styles.repository}>{repository.title}</Text>
               <View style={styles.techsContainer}>
-                {repository.techs.split(",").map((rep) => (
+                {repository.techs.map((rep) => (
                   <Text style={styles.tech}>{rep}</Text>
                 ))}
               </View>
